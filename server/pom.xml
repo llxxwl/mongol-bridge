@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <!-- 父项目统一管理 Spring Boot 依赖和插件的兼容版本。 -->
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>3.5.7</version>
+    <relativePath/>
+  </parent>
+  <!-- Maven 项目标识：组织名、项目名、版本；SNAPSHOT 表示开发中的版本。 -->
+  <groupId>com.mongolbridge</groupId>
+  <artifactId>mongol-bridge-server</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>MongolBridge</name>
+  <description>Local recording upload prototype</description>
+  <!-- 编译目标为 Java 21，运行和构建时应使用相应 JDK。 -->
+  <properties><java.version>21</java.version></properties>
+  <dependencies>
+    <!-- Web 依赖包含 HTTP 接口、JSON 转换和内置 Tomcat。 -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+    <!-- test 范围只参与测试，不作为正式服务的运行依赖。 -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+  <!-- 支持 spring-boot:run，并将项目打包成可用 java -jar 启动的文件。 -->
+  <build><plugins><plugin>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-maven-plugin</artifactId>
+  </plugin></plugins></build>
+</project>

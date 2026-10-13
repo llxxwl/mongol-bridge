@@ -1,0 +1,39 @@
+<!-- WXML 描述结构，class 对应 WXSS 样式，{{表达式}} 读取 index.js 的 data。 -->
+<view class="page">
+  <view class="header">
+    <text class="brand">蒙语桥</text>
+    <text class="brand-en">MongolBridge</text>
+  </view>
+
+  <!-- 当前为固定的蒙古语转中文方向，尚未提供语言切换。 -->
+  <view class="language-row">
+    <view class="language"><text class="language-name">蒙古语</text><text class="language-detail">内蒙古地区</text></view>
+    <text class="direction">→</text>
+    <view class="language target"><text class="language-name">中文</text><text class="language-detail">简体中文</text></view>
+  </view>
+
+  <!-- 根据 uploadState 显示上传结果，这些提示不是识别原文或译文。 -->
+  <view class="result-section">
+    <view class="section-heading"><text>翻译结果</text><text class="service-status">翻译未接入</text></view>
+    <view class="empty-result">
+      <view class="sound-mark"><view></view><view></view><view></view><view></view><view></view></view>
+      <text class="empty-title">{{uploadState === 'success' ? '录音已上传' : (audioPath ? '录音已就绪' : '等待录音')}}</text>
+      <text class="empty-description">{{uploadMessage || (audioPath ? '翻译服务尚未接入，暂时无法生成译文' : '暂无翻译内容')}}</text>
+    </view>
+  </view>
+
+  <!-- bindtap 绑定点击处理函数；disabled 禁止点击；loading 显示等待图标。
+       三元表达式 条件 ? 值1 : 值2 根据状态选择按钮文字或样式。 -->
+  <view class="record-section">
+    <view class="record-status"><view class="status-dot {{status === 'recording' ? 'active' : ''}}"></view><text>{{statusText}}</text></view>
+    <text class="timer">{{timeText}}</text>
+    <text class="duration-limit">单次录音最长 60 秒</text>
+    <button class="record-button {{status === 'recording' ? 'stop-button' : ''}}" bindtap="toggleRecording" disabled="{{status === 'starting' || status === 'stopping' || status === 'uploading'}}">{{status === 'recording' ? '结束录音' : (status === 'starting' ? '正在启动…' : (status === 'stopping' ? '正在保存…' : (audioPath ? '重新录音' : '开始录音')))}}</button>
+    <view class="audio-actions">
+      <button class="secondary-button" bindtap="togglePlayback" disabled="{{!audioPath || status !== 'idle'}}">{{playing ? '停止试听' : '试听录音'}}</button>
+      <button class="secondary-button clear-button" bindtap="clearRecording" disabled="{{!audioPath || status !== 'idle'}}">清除录音</button>
+    </view>
+    <button class="secondary-button upload-button" bindtap="uploadRecording" loading="{{status === 'uploading'}}" disabled="{{!audioPath || status !== 'idle' || uploadState === 'success'}}">{{status === 'uploading' ? '正在上传' : (uploadState === 'success' ? '已上传' : (uploadState === 'error' ? '重试上传' : '上传录音'))}}</button>
+    <text class="privacy-note">点击上传后发送录音，接收后不长期保存</text>
+  </view>
+</view>

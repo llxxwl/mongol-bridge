@@ -1,0 +1,34 @@
+# Build output and editor preferences
+**/target/
+**/.idea/
+**/.vscode/
+*.iml
+**/node_modules/
+
+# Computer-specific WeChat DevTools settings
+**/project.private.config.json
+
+# Local credentials and overrides
+.env
+.env.*
+!.env.example
+**/application-local.properties
+**/application-local.yml
+**/application-local.yaml
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Recordings, logs and temporary files
+*.mp3
+*.wav
+*.m4a
+*.aac
+*.pcm
+*.log
+*.tmp
+**/uploads/
+**/recordings/
+.DS_Store
+Thumbs.db
